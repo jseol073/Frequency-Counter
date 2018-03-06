@@ -8,7 +8,9 @@ import java.util.*;
 public class FrequencyCounter {
 
     /**
-     *
+     * Checks if contents of the url are in the command line, if not then make String content
+     * equal to contents of url
+     * Then prints top ten word frequencies
      * @param args, contents of url in commandline
      */
     public static void main(String[] args) {
@@ -100,8 +102,14 @@ public class FrequencyCounter {
         }
         List<String> noSpecialCharList = new ArrayList<>();
         for (String s : justWords) {
-            String noSpecialChar = s.replaceAll("[0-9,.?_*#'\\-()]", "");
+            String noSpecialChar = s.replaceAll("[0-9,.?_*#'\\-()\\[\\]]", "");
             noSpecialCharList.add(noSpecialChar);
+        }
+
+        for (int i = 0; i < noSpecialCharList.size(); i++) { //removes elements that are empty
+            if (noSpecialCharList.get(i).isEmpty()) {
+                noSpecialCharList.remove(i);
+            }
         }
         return noSpecialCharList;
     }
