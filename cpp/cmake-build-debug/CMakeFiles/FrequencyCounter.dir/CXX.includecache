@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/johnseol/CLionProjects/frequencycount-jseol073/cpp/src/main.cpp
+main.h
+/Users/johnseol/CLionProjects/frequencycount-jseol073/cpp/src/main.h
+iostream
+-
+map
+-
+string
+-
+fstream
+-
+
+/Users/johnseol/CLionProjects/frequencycount-jseol073/cpp/src/main.h
+

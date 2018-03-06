@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.9)
+project(FrequencyCounter)
+set(CMAKE_CXX_STANDARD 11)
+add_executable(FrequencyCounter src/main.cpp src/main.h)
+#add_executable(FrequencyCounter Test test/test.cpp test/test.h)
