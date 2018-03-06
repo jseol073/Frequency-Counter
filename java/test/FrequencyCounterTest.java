@@ -1,10 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -30,7 +27,7 @@ public class FrequencyCounterTest {
 
     @Test
     public void removeSpecialCharacters() {
-        List<String> testList = FrequencyCounter.textToList(test2);
+        List<String> testList = FrequencyCounter.textToList(test2.toLowerCase());
         List<String> output = new ArrayList<>();
         System.out.println(FrequencyCounter.removeSpecialCharacters(testList));
         //assertEquals(output, FrequencyCounter.removeCharacters(test));
@@ -38,7 +35,7 @@ public class FrequencyCounterTest {
 
     @Test
     public void removeSpecialCharactersTest() {
-        List<String> testList = FrequencyCounter.textToList(test);
+        List<String> testList = FrequencyCounter.textToList(test.toLowerCase());
         List<String> output = new ArrayList<>();
         System.out.println(FrequencyCounter.removeSpecialCharacters(testList));
         //assertEquals(output, FrequencyCounter.removeCharacters(test));
@@ -63,19 +60,30 @@ public class FrequencyCounterTest {
 
     @Test
     public void countFrequency() {
-        String textLowerCased = test.toLowerCase();
-        List<String> testList = FrequencyCounter.textToList(textLowerCased);
-        List<String> anotherTest = FrequencyCounter.removeSpecialCharacters(testList);
-        System.out.println(anotherTest.size());
-        FrequencyCounter.countFrequency(anotherTest);
+        String textLowerCased = test2.toLowerCase();
+        List<String> textList = FrequencyCounter.textToList(textLowerCased);
+        List<String> finalTextList = FrequencyCounter.removeSpecialCharacters(textList);
+        FrequencyCounter.countFrequency(finalTextList);
+        Map<String, Integer> output = new HashMap<>();
+
     }
 
     @Test
     public void getHighestFrequencyTest() {
-        String textLowerCased = test2.toLowerCase();
+        String textLowerCased = test.toLowerCase();
         List<String> testList = FrequencyCounter.textToList(textLowerCased);
         List<String> anotherTest = FrequencyCounter.removeSpecialCharacters(testList);
         Map<String, Integer> frequencyMap = FrequencyCounter.countFrequency(anotherTest);
-        System.out.println(FrequencyCounter.getHighestFrequency(frequencyMap));
+        String output = "1) word: the, Frequency: 8 \n" +
+                "2) word: and, Frequency: 5 \n" +
+                "3) word: of, Frequency: 4 \n" +
+                "4) word: is, Frequency: 3 \n" +
+                "5) word: are, Frequency: 3 \n" +
+                "6) word: by, Frequency: 3 \n" +
+                "7) word: stomach, Frequency: 2 \n" +
+                "8) word: tissue, Frequency: 2 \n" +
+                "9) word: fibrous, Frequency: 2 \n" +
+                "10) word: peritoneal, Frequency: 2 \n";
+        assertEquals(output, FrequencyCounter.getHighestFrequency(frequencyMap));
     }
 }

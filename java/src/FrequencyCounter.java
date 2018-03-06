@@ -7,6 +7,10 @@ import java.util.*;
 
 public class FrequencyCounter {
 
+    /**
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         String urlString = "https://gist.githubusercontent.com/nicknytko/70004f44176a92d11612f62318ddb830" +
                 "/raw/5b684a9e15c9e6cbf2cc031c5a489b328f259908/17921-0.txt";
@@ -20,14 +24,19 @@ public class FrequencyCounter {
         List<String> textList = textToList(content);
         List<String> textFinalList = removeSpecialCharacters(textList);
         Map<String, Integer> frequencyMap = countFrequency(textFinalList);
-
+        System.out.println(getHighestFrequency(frequencyMap));
 
     }
 
-
+    /**
+     *
+     * @param frequencyMap
+     * @return
+     */
     public static String getHighestFrequency(Map<String, Integer> frequencyMap) {
         Object[] frequencyArr = frequencyMap.entrySet().toArray();
 
+        //Got comparator from https://stackoverflow.com/questions/21054415/how-to-sort-a-hashmap-by-the-integer-value
         Arrays.sort(frequencyArr, new Comparator() {
             public int compare(Object o1, Object o2) {
                 return ((Map.Entry<String, Integer>) o2).getValue()
@@ -36,11 +45,11 @@ public class FrequencyCounter {
         });
 
         StringBuilder topTen = new StringBuilder();
-        for (int i = 1; i <= frequencyArr.length - 1; i++) {
-            if (i <= 10) {
+        for (int i = 0; i <= frequencyArr.length - 1; i++) {
+            if (i < 10) {
                 String key = ((Map.Entry<String, Integer>) frequencyArr[i]).getKey();
                 int value = ((Map.Entry<String, Integer>) frequencyArr[i]).getValue();
-                topTen.append(String.format("%d) word: %s, Frequency: %d \n", i, key, value));
+                topTen.append(String.format("%d) word: %s, Frequency: %d \n", i + 1, key, value));
             } else {
                 break;
             }
@@ -61,7 +70,7 @@ public class FrequencyCounter {
 
             String line;
             while ((line = in.readLine()) != null) {
-                content.append(line + "\n");
+                content.append(line);
             }
             in.close();
         }
@@ -75,7 +84,7 @@ public class FrequencyCounter {
     }
 
     /**
-     *
+     * removes the certain character from each element of contentList
      * @param contentList
      * @return
      */
@@ -89,7 +98,7 @@ public class FrequencyCounter {
         }
         List<String> noSpecialCharList = new ArrayList<>();
         for (String s : justWords) {
-            String noSpecialChar = s.replaceAll("[0-9,.?_*#'-]", "");
+            String noSpecialChar = s.replaceAll("[0-9,.?_*#'\\-()]", "");
             noSpecialCharList.add(noSpecialChar);
         }
         return noSpecialCharList;
