@@ -8,8 +8,8 @@ import java.util.*;
 public class FrequencyCounter {
 
     /**
-     * 
-     * @param args
+     *
+     * @param args, contents of url in commandline
      */
     public static void main(String[] args) {
         String urlString = "https://gist.githubusercontent.com/nicknytko/70004f44176a92d11612f62318ddb830" +
@@ -21,19 +21,21 @@ public class FrequencyCounter {
         } else {
             content = getText(args[0]);
         }
-        List<String> textList = textToList(content);
-        List<String> textFinalList = removeSpecialCharacters(textList);
-        Map<String, Integer> frequencyMap = countFrequency(textFinalList);
-        System.out.println(getHighestFrequency(frequencyMap));
 
+        List<String> textList = textToList(content); //turns content into arraylist
+        List<String> textFinalList = removeSpecialCharacters(textList); //no special characters
+        Map<String, Integer> frequencyMap = countFrequency(textFinalList); //map that takes in frequency
+        System.out.println(getTopTenFrequencies(frequencyMap)); //lists top ten frequencies
     }
 
     /**
-     *
-     * @param frequencyMap
-     * @return
+     * Takes frequency map and sorts the values in increasing order by making an object array of the map's entryset
+     * and use the comparater to sort those values
+     * Then use a loop of the array and list only the top ten elements
+     * @param frequencyMap, output of countFrequency method
+     * @return String that ranks the top ten frequencies
      */
-    public static String getHighestFrequency(Map<String, Integer> frequencyMap) {
+    public static String getTopTenFrequencies(Map<String, Integer> frequencyMap) {
         Object[] frequencyArr = frequencyMap.entrySet().toArray();
 
         //Got comparator from https://stackoverflow.com/questions/21054415/how-to-sort-a-hashmap-by-the-integer-value
@@ -84,14 +86,14 @@ public class FrequencyCounter {
     }
 
     /**
-     * removes the certain character from each element of contentList
-     * @param contentList
-     * @return
+     * removes the certain characters from each element of contentList
+     * @param contentList, ArrayList<String> in which each word is an element
+     * @return A List<String> that have those characters removed from each element
      */
     public static List<String> removeSpecialCharacters(List<String> contentList) {
         List<String> justWords = new ArrayList<>();
         for (int i = 0; i < contentList.size(); i++) {
-            if (contentList.get(i).matches("[a-zA-Z]")) { //letter
+            if (contentList.get(i).matches("[a-zA-Z]")) { //letter a-z
                 continue;
             }
             justWords.add(contentList.get(i));
@@ -133,9 +135,10 @@ public class FrequencyCounter {
      * @return ArrayList in which each element is a word
      */
     public static List<String> textToList(String text) {
-        String removeCharacters = text.replaceAll("[_*#]", " ");
+        String removeCharacters = text.replaceAll("[/_*#]", " ");
         String[] splitText = removeCharacters.split("\\s+");
         List<String> textList = new ArrayList<>(Arrays.asList(splitText));
+
         for (int i = 0; i < textList.size(); i++) { //removes elements that are empty
             if (textList.get(i).isEmpty()) {
                 textList.remove(i);

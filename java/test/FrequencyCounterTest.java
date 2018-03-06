@@ -6,6 +6,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class FrequencyCounterTest {
+    //paragraphs from text file
     private String test = "_Stomach and Intestine._--Provided the peritoneal surfaces are\n" +
             "accurately apposed, wounds of the stomach and intestine heal with great\n" +
             "rapidity. Within a few hours the peritoneal surfaces are glued together\n" +
@@ -22,23 +23,27 @@ public class FrequencyCounterTest {
     }
 
     @Test
-    public void getText() {
-    }
-
-    @Test
     public void removeSpecialCharacters() {
         List<String> testList = FrequencyCounter.textToList(test2.toLowerCase());
-        List<String> output = new ArrayList<>();
+        String expected = "[artificial, or, passive, immunity, a, form, of, immunity, can, be, " +
+                "induced, by, the, introduction, of, protective, substances, obtained, from, an, animal, which]";
+        String actual = FrequencyCounter.removeSpecialCharacters(testList).toString();
         System.out.println(FrequencyCounter.removeSpecialCharacters(testList));
-        //assertEquals(output, FrequencyCounter.removeCharacters(test));
+        assertEquals(expected, actual);
     }
 
     @Test
     public void removeSpecialCharactersTest() {
         List<String> testList = FrequencyCounter.textToList(test.toLowerCase());
-        List<String> output = new ArrayList<>();
-        System.out.println(FrequencyCounter.removeSpecialCharacters(testList));
-        //assertEquals(output, FrequencyCounter.removeCharacters(test));
+        String expectedAsString = "[stomach, and, intestine, provided, the, peritoneal, surfaces, are, " +
+                "accurately, apposed, wounds, of, the, stomach, and, intestine, heal, with, great, " +
+                "rapidity, within, few, hours, the, peritoneal, surfaces, are, glued, together, by, " +
+                "thin, layer, of, fibrin, and, leucocytes, which, is, speedily, organised, and, replaced, " +
+                "by, fibrous, tissue, fibrous, tissue, takes, the, place, of, the, muscular, elements, which, " +
+                "are, not, regenerated, the, mucous, lining, is, restored, by, ingrowth, from, the, margins, and, " +
+                "there, is, evidence, that, some, of, the, secreting, glands, may, be, reproduced]";
+        String actualAsString = FrequencyCounter.removeSpecialCharacters(testList).toString();
+        assertEquals(expectedAsString, actualAsString);
     }
 
     @Test
@@ -53,7 +58,7 @@ public class FrequencyCounterTest {
 
     @Test
     public void textToListTest() {
-        String test = "test    test    \n test";
+        String test = "test    test     test";
         String[] output = {"test", "test", "test"};
         assertEquals(new ArrayList<>(Arrays.asList(output)), FrequencyCounter.textToList(test));
     }
@@ -64,7 +69,6 @@ public class FrequencyCounterTest {
         List<String> textList = FrequencyCounter.textToList(textLowerCased);
         List<String> finalTextList = FrequencyCounter.removeSpecialCharacters(textList);
         FrequencyCounter.countFrequency(finalTextList);
-        Map<String, Integer> output = new HashMap<>();
 
     }
 
@@ -84,6 +88,6 @@ public class FrequencyCounterTest {
                 "8) word: tissue, Frequency: 2 \n" +
                 "9) word: fibrous, Frequency: 2 \n" +
                 "10) word: peritoneal, Frequency: 2 \n";
-        assertEquals(output, FrequencyCounter.getHighestFrequency(frequencyMap));
+        assertEquals(output, FrequencyCounter.getTopTenFrequencies(frequencyMap));
     }
 }
