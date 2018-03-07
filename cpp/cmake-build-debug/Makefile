@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named unit-tests
+
+# Build rule for target.
+unit-tests: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 unit-tests
+.PHONY : unit-tests
+
+# fast build rule for target.
+unit-tests/fast:
+	$(MAKE) -f CMakeFiles/unit-tests.dir/build.make CMakeFiles/unit-tests.dir/build
+.PHONY : unit-tests/fast
+
+#=============================================================================
 # Target rules for targets named FrequencyCounter
 
 # Build rule for target.
@@ -129,6 +142,7 @@ src/main.o: src/main.cpp.o
 
 # target to build an object file
 src/main.cpp.o:
+	$(MAKE) -f CMakeFiles/unit-tests.dir/build.make CMakeFiles/unit-tests.dir/src/main.cpp.o
 	$(MAKE) -f CMakeFiles/FrequencyCounter.dir/build.make CMakeFiles/FrequencyCounter.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
@@ -138,6 +152,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
+	$(MAKE) -f CMakeFiles/unit-tests.dir/build.make CMakeFiles/unit-tests.dir/src/main.cpp.i
 	$(MAKE) -f CMakeFiles/FrequencyCounter.dir/build.make CMakeFiles/FrequencyCounter.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
@@ -147,8 +162,36 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
+	$(MAKE) -f CMakeFiles/unit-tests.dir/build.make CMakeFiles/unit-tests.dir/src/main.cpp.s
 	$(MAKE) -f CMakeFiles/FrequencyCounter.dir/build.make CMakeFiles/FrequencyCounter.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
+
+test/test.o: test/test.cpp.o
+
+.PHONY : test/test.o
+
+# target to build an object file
+test/test.cpp.o:
+	$(MAKE) -f CMakeFiles/unit-tests.dir/build.make CMakeFiles/unit-tests.dir/test/test.cpp.o
+.PHONY : test/test.cpp.o
+
+test/test.i: test/test.cpp.i
+
+.PHONY : test/test.i
+
+# target to preprocess a source file
+test/test.cpp.i:
+	$(MAKE) -f CMakeFiles/unit-tests.dir/build.make CMakeFiles/unit-tests.dir/test/test.cpp.i
+.PHONY : test/test.cpp.i
+
+test/test.s: test/test.cpp.s
+
+.PHONY : test/test.s
+
+# target to generate assembly for a file
+test/test.cpp.s:
+	$(MAKE) -f CMakeFiles/unit-tests.dir/build.make CMakeFiles/unit-tests.dir/test/test.cpp.s
+.PHONY : test/test.cpp.s
 
 # Help Target
 help:
@@ -158,10 +201,14 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... unit-tests"
 	@echo "... FrequencyCounter"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... test/test.o"
+	@echo "... test/test.i"
+	@echo "... test/test.s"
 .PHONY : help
 
 

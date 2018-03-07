@@ -17,6 +17,14 @@ string
 -
 fstream
 -
+sstream
+-
+vector
+-
+algorithm
+-
+array
+-
 
 /Users/johnseol/CLionProjects/frequencycount-jseol073/cpp/src/main.h
 

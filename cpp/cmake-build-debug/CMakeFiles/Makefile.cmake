@@ -49,5 +49,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/unit-tests.dir/DependInfo.cmake"
   "CMakeFiles/FrequencyCounter.dir/DependInfo.cmake"
   )
