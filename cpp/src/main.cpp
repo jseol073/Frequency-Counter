@@ -46,7 +46,7 @@ int main(int argc, char * argv[]) {
     }
 
     std::map<string, int> frequencyMap = countFrequencies(wordVector);
-    cout << wordsOfVector << endl;
+    cout <<  wordsOfVector << endl;
     return 0;
 }
 
